@@ -1,20 +1,47 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import Form1Screen from "./screens/Form1Screen";
+import SearchLocationScreen from "./screens/SearchLocationScreen";
+import ResultsScreen from "./screens/ResultsScreen";
+import Form2Screen from "./screens/Form2Screen";
+
+const Stack = createNativeStackNavigator();
+
+const LocationStack = () => (
+	<Stack.Navigator>
+		<Stack.Screen
+			name="Form1Location"
+			component={Form1Screen}
+		/>
+		<Stack.Screen
+			name="SearchLocation"
+			component={SearchLocationScreen}
+		/>
+	</Stack.Navigator>
+);
 
 export default function App() {
 	return (
-		<View style={styles.container}>
-			<Text>Open up App.js to start working on your app!</Text>
+		<>
 			<StatusBar style="auto" />
-		</View>
+			<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen
+						name="Form"
+						component={LocationStack}
+					/>
+					<Stack.Screen
+						name="Form2"
+						component={Form2Screen}
+					/>
+					<Stack.Screen
+						name="Results"
+						component={ResultsScreen}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
+
+		</>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});
