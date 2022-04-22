@@ -9,7 +9,11 @@ import Form2Screen from "./screens/Form2Screen";
 const Stack = createNativeStackNavigator();
 
 const LocationStack = () => (
-	<Stack.Navigator>
+	<Stack.Navigator
+		screenOptions={{
+			headerShown: false
+		}}
+	>
 		<Stack.Screen
 			name="Form1Location"
 			component={Form1Screen}
@@ -26,7 +30,11 @@ export default function App() {
 		<>
 			<StatusBar style="auto" />
 			<NavigationContainer>
-				<Stack.Navigator>
+				<Stack.Navigator
+					screenOptions={{
+						headerShown: false
+					}}
+				>
 					<Stack.Screen
 						name="Form"
 						component={LocationStack}

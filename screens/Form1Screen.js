@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import {Ionicons} from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
 const Form1Screen = ({ navigation }) => {
@@ -13,13 +14,19 @@ const Form1Screen = ({ navigation }) => {
 
 	return (
 		<View style={styles.rootContainer}>
-			<Text>Form1Screen</Text>
-			<Pressable onPress={handleGoToLocation}>
-				<Text style={styles.buttonText}>Go to Search Location Screen</Text>
-			</Pressable>
-			<Pressable onPress={handleGoToForm2}>
-				<Text style={styles.buttonText}>Go to Form 2 Screen</Text>
-			</Pressable>
+			<Ionicons
+				name="arrow-forward"
+				style={styles.navigationControlStyle}
+				size={36}
+				color={"#007bff"}
+				onPress={handleGoToForm2}
+			/>
+			<View style={styles.linkContainer}>
+				<Text>Form1Screen</Text>
+				<Pressable onPress={handleGoToLocation}>
+					<Text style={styles.buttonText}>Go to Search Location Screen</Text>
+				</Pressable>
+			</View>
 		</View>
 	);
 };
@@ -31,10 +38,19 @@ Form1Screen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	rootContainer: {
+	rootContainer:{
+		flex: 1,
+		flexDirection: "column"
+	},
+	linkContainer: {
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center"
+	},
+	navigationControlStyle: {
+		paddingVertical: 36,
+		paddingHorizontal: 18,
+		alignSelf: "flex-end"
 	},
 	buttonText: {
 		color: "#007bff",
