@@ -1,21 +1,18 @@
-import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
+import NavigateButton from "../components/UI/NavigateButton";
 
-const SearchLocationScreen = ({navigation}) => {
-
+const SearchLocationScreen = ({ navigation }) => {
 	const handleGoToForm = () => {
 		navigation.goBack();
 	};
 
 	return (
 		<View style={styles.rootContainer}>
-			<Ionicons
-				name="arrow-back"
-				style={styles.navigationControlStyle}
-				size={36}
-				color={"#007bff"}
+			<NavigateButton
 				onPress={handleGoToForm}
+				accessibilityHint="goBackButton"
+				direction="back"
 			/>
 			<View style={styles.linkContainer}>
 				<Text>SearchLocationScreen</Text>
@@ -30,25 +27,19 @@ SearchLocationScreen.propTypes = {
 	}).isRequired,
 };
 
-
 const styles = StyleSheet.create({
-	rootContainer:{
+	rootContainer: {
 		flex: 1,
 	},
 	linkContainer: {
 		flex: 1,
 		justifyContent: "center",
-		alignItems: "center"
-	},
-	navigationControlStyle: {
-		paddingVertical: 36,
-		paddingHorizontal: 18,
-		alignSelf: "flex-start"
+		alignItems: "center",
 	},
 	buttonText: {
 		color: "#007bff",
-		margin: 8
-	}
+		margin: 8,
+	},
 });
 
 export default SearchLocationScreen;

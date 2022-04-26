@@ -1,9 +1,8 @@
-import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import NavigateButton from "../components/UI/NavigateButton";
 
 const Form2Screen = ({ navigation }) => {
-
 	const handleGoToForm1 = () => {
 		navigation.goBack();
 	};
@@ -13,54 +12,56 @@ const Form2Screen = ({ navigation }) => {
 	};
 
 	return (
-		<View style={styles.rootContainer}>
-			<View style={styles.navigationControlStyle}>
-				<Ionicons
-					name="arrow-back"
-					size={36}
-					color={"#007bff"}
-					onPress={handleGoToForm1}
-				/>
-				<Ionicons
-					name="arrow-forward"
-					size={36}
-					color={"#007bff"}
-					onPress={handleGoToResults}
-				/>
+		<ImageBackground
+			source={require("../assets/Background.png")}
+			style={{ width: "100%", height: "100%" }}
+			resizeMode="cover"
+		>
+			<View style={styles.rootContainer}>
+				<View style={styles.navigationControlStyle}>
+					<NavigateButton
+						onPress={handleGoToForm1}
+						accessibilityHint="goBackButton"
+						direction="back"
+					/>
+					<NavigateButton
+						onPress={handleGoToResults}
+						accessibilityHint="goToResultsButton"
+						direction="forward"
+					/>
+				</View>
+				<View style={styles.screenNameStyle}>
+					<Text>Form2Screen</Text>
+				</View>
 			</View>
-			<View style={styles.screenNameStyle}>
-				<Text>Form1Screen</Text>
-			</View>
-		</View>
+		</ImageBackground>
 	);
 };
 
 Form2Screen.propTypes = {
 	navigation: PropTypes.shape({
 		navigate: PropTypes.func.isRequired,
-		goBack: PropTypes.func.isRequired
+		goBack: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
 const styles = StyleSheet.create({
 	rootContainer: {
-		flex: 1
+		flex: 1,
 	},
 	navigationControlStyle: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		paddingHorizontal: 18,
-		paddingVertical: 36
 	},
 	screenNameStyle: {
 		flex: 1,
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	},
 	buttonText: {
 		color: "#007bff",
-		margin: 8
-	}
+		margin: 8,
+	},
 });
 
 export default Form2Screen;

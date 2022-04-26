@@ -1,9 +1,14 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import {Ionicons} from "@expo/vector-icons";
+import {
+	ImageBackground,
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+} from "react-native";
 import PropTypes from "prop-types";
+import NavigateButton from "../components/UI/NavigateButton";
 
 const Form1Screen = ({ navigation }) => {
-
 	const handleGoToLocation = () => {
 		navigation.navigate("SearchLocation");
 	};
@@ -13,21 +18,25 @@ const Form1Screen = ({ navigation }) => {
 	};
 
 	return (
-		<View style={styles.rootContainer}>
-			<Ionicons
-				name="arrow-forward"
-				style={styles.navigationControlStyle}
-				size={36}
-				color={"#007bff"}
+		<ImageBackground
+			source={require("../assets/Background.png")}
+			style={{ width: "100%", height: "100%" }}
+			resizeMode="cover"
+		>
+			<NavigateButton
+				accessibilityHint="goToForm2Button"
+				direction="forward"
 				onPress={handleGoToForm2}
 			/>
-			<View style={styles.linkContainer}>
-				<Text>Form1Screen</Text>
-				<Pressable onPress={handleGoToLocation}>
-					<Text style={styles.buttonText}>Go to Search Location Screen</Text>
-				</Pressable>
+			<View style={styles.rootContainer}>
+				<View style={styles.linkContainer}>
+					<Text>Form1Screen</Text>
+					<Pressable onPress={handleGoToLocation}>
+						<Text style={styles.buttonText}>Go to Search Location Screen</Text>
+					</Pressable>
+				</View>
 			</View>
-		</View>
+		</ImageBackground>
 	);
 };
 
@@ -38,24 +47,19 @@ Form1Screen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	rootContainer:{
+	rootContainer: {
 		flex: 1,
-		flexDirection: "column"
+		flexDirection: "column",
 	},
 	linkContainer: {
 		flex: 1,
 		justifyContent: "center",
-		alignItems: "center"
-	},
-	navigationControlStyle: {
-		paddingVertical: 36,
-		paddingHorizontal: 18,
-		alignSelf: "flex-end"
+		alignItems: "center",
 	},
 	buttonText: {
 		color: "#007bff",
-		margin: 8
-	}
+		margin: 8,
+	},
 });
 
 export default Form1Screen;

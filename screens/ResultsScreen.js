@@ -1,26 +1,29 @@
-import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import PropTypes from "prop-types";
+import NavigateButton from "../components/UI/NavigateButton";
 
-const ResultsScreen = ({navigation}) => {
-
+const ResultsScreen = ({ navigation }) => {
 	const handleGoToForm2 = () => {
 		navigation.goBack();
 	};
 
 	return (
-		<View style={styles.rootContainer}>
-			<Ionicons
-				name="arrow-back"
-				style={styles.navigationControlStyle}
-				size={36}
-				color={"#007bff"}
-				onPress={handleGoToForm2}
-			/>
-			<View style={styles.linkContainer}>
-				<Text>ResultsScreen</Text>
+		<ImageBackground
+			source={require("../assets/Background.png")}
+			style={{ width: "100%", height: "100%" }}
+			resizeMode="cover"
+		>
+			<View style={styles.rootContainer}>
+				<NavigateButton
+					onPress={handleGoToForm2}
+					accessibilityHint="goToForm2Button"
+					direction="back"
+				/>
+				<View style={styles.linkContainer}>
+					<Text>ResultsScreen</Text>
+				</View>
 			</View>
-		</View>
+		</ImageBackground>
 	);
 };
 
@@ -30,25 +33,19 @@ ResultsScreen.propTypes = {
 	}).isRequired,
 };
 
-
 const styles = StyleSheet.create({
-	rootContainer:{
+	rootContainer: {
 		flex: 1,
 	},
 	linkContainer: {
 		flex: 1,
 		justifyContent: "center",
-		alignItems: "center"
-	},
-	navigationControlStyle: {
-		paddingVertical: 36,
-		paddingHorizontal: 18,
-		alignSelf: "flex-start"
+		alignItems: "center",
 	},
 	buttonText: {
 		color: "#007bff",
-		margin: 8
-	}
+		margin: 8,
+	},
 });
 
 export default ResultsScreen;
