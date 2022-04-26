@@ -1,12 +1,7 @@
-import {
-	ImageBackground,
-	Pressable,
-	StyleSheet,
-	Text,
-	View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import PropTypes from "prop-types";
 import NavigateButton from "../components/UI/NavigateButton";
+import Background from "../components/UI/Background";
 
 const Form1Screen = ({ navigation }) => {
 	const handleGoToLocation = () => {
@@ -18,11 +13,7 @@ const Form1Screen = ({ navigation }) => {
 	};
 
 	return (
-		<ImageBackground
-			source={require("../assets/Background.png")}
-			style={{ width: "100%", height: "100%" }}
-			resizeMode="cover"
-		>
+		<Background>
 			<NavigateButton
 				accessibilityHint="goToForm2Button"
 				direction="forward"
@@ -36,7 +27,7 @@ const Form1Screen = ({ navigation }) => {
 					</Pressable>
 				</View>
 			</View>
-		</ImageBackground>
+		</Background>
 	);
 };
 

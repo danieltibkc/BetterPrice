@@ -1,24 +1,21 @@
 import { Pressable, StyleSheet } from "react-native";
-import Card from "./Card";
 import { Ionicons } from "@expo/vector-icons";
 import { Globals } from "../../constants/styles";
 import PropTypes from "prop-types";
 
 const NavigateButton = ({ onPress, direction, accessibilityHint }) => {
   return (
-    <Card>
-      <Pressable onPress={onPress} accessibilityHint={accessibilityHint}>
-        <Ionicons
-          name={direction === "forward" ? "arrow-forward" : "arrow-back"}
-          style={[
-            styles.navigationControlStyle,
-            { alignSelf: direction === "forward" ? "flex-end" : "flex-start" },
-          ]}
-          size={36}
-          color={Globals.colors.icons}
-        />
-      </Pressable>
-    </Card>
+    <Pressable onPress={onPress} accessibilityHint={accessibilityHint}>
+      <Ionicons
+        name={direction === "forward" ? "arrow-forward" : "arrow-back"}
+        style={[
+          styles.navigationControlStyle,
+          { alignSelf: direction === "forward" ? "flex-end" : "flex-start" },
+        ]}
+        size={36}
+        color={Globals.colors.icons}
+      />
+    </Pressable>
   );
 };
 
@@ -30,8 +27,19 @@ NavigateButton.propTypes = {
 
 const styles = StyleSheet.create({
   navigationControlStyle: {
-    paddingVertical: 48,
-    paddingHorizontal: 18,
+    marginVertical: 48,
+    marginHorizontal: 18,
+    padding: 4,
+    borderRadius: 4,
+    backgroundColor: "white",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
 });
 
