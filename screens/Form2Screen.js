@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import NavigateButton from "../components/UI/NavigateButton";
+import Background from "../components/UI/Background";
 
 const Form2Screen = ({ navigation }) => {
 	const handleGoToForm1 = () => {
@@ -12,11 +13,7 @@ const Form2Screen = ({ navigation }) => {
 	};
 
 	return (
-		<ImageBackground
-			source={require("../assets/Background.png")}
-			style={{ width: "100%", height: "100%" }}
-			resizeMode="cover"
-		>
+		<Background>
 			<View style={styles.rootContainer}>
 				<View style={styles.navigationControlStyle}>
 					<NavigateButton
@@ -34,7 +31,7 @@ const Form2Screen = ({ navigation }) => {
 					<Text>Form2Screen</Text>
 				</View>
 			</View>
-		</ImageBackground>
+		</Background>
 	);
 };
 
