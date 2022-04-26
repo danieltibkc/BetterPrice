@@ -11,17 +11,11 @@ const Stack = createNativeStackNavigator();
 const LocationStack = () => (
 	<Stack.Navigator
 		screenOptions={{
-			headerShown: false
+			headerShown: false,
 		}}
 	>
-		<Stack.Screen
-			name="Form1Location"
-			component={Form1Screen}
-		/>
-		<Stack.Screen
-			name="SearchLocation"
-			component={SearchLocationScreen}
-		/>
+		<Stack.Screen name="Form1Location" component={Form1Screen} />
+		<Stack.Screen name="SearchLocation" component={SearchLocationScreen} />
 	</Stack.Navigator>
 );
 
@@ -32,24 +26,14 @@ export default function App() {
 			<NavigationContainer>
 				<Stack.Navigator
 					screenOptions={{
-						headerShown: false
+						headerShown: false,
 					}}
 				>
-					<Stack.Screen
-						name="Form"
-						component={LocationStack}
-					/>
-					<Stack.Screen
-						name="Form2"
-						component={Form2Screen}
-					/>
-					<Stack.Screen
-						name="Results"
-						component={ResultsScreen}
-					/>
+					<Stack.Screen name="Form" component={LocationStack} />
+					<Stack.Screen name="Form2" component={Form2Screen} />
+					<Stack.Screen name="Results" component={ResultsScreen} />
 				</Stack.Navigator>
 			</NavigationContainer>
-
 		</>
 	);
 }

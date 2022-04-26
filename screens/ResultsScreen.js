@@ -1,54 +1,51 @@
-import { Ionicons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import PropTypes from "prop-types";
+import NavigateButton from "../components/UI/NavigateButton";
 
 const ResultsScreen = ({ navigation }) => {
-  const handleGoToForm2 = () => {
-    navigation.goBack();
-  };
+	const handleGoToForm2 = () => {
+		navigation.goBack();
+	};
 
-  return (
-    <View style={styles.rootContainer}>
-      <Pressable onPress={handleGoToForm2} accessibilityHint="goToForm2Button">
-        <Ionicons
-          name="arrow-back"
-          style={styles.navigationControlStyle}
-          size={36}
-          color={"#007bff"}
-          onPress={handleGoToForm2}
-        />
-      </Pressable>
-      <View style={styles.linkContainer}>
-        <Text>ResultsScreen</Text>
-      </View>
-    </View>
-  );
+	return (
+		<ImageBackground
+			source={require("../assets/Background.png")}
+			style={{ width: "100%", height: "100%" }}
+			resizeMode="cover"
+		>
+			<View style={styles.rootContainer}>
+				<NavigateButton
+					onPress={handleGoToForm2}
+					accessibilityHint="goToForm2Button"
+					direction="back"
+				/>
+				<View style={styles.linkContainer}>
+					<Text>ResultsScreen</Text>
+				</View>
+			</View>
+		</ImageBackground>
+	);
 };
 
 ResultsScreen.propTypes = {
-  navigation: PropTypes.shape({
-    goBack: PropTypes.func.isRequired,
-  }).isRequired,
+	navigation: PropTypes.shape({
+		goBack: PropTypes.func.isRequired,
+	}).isRequired,
 };
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-  },
-  linkContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  navigationControlStyle: {
-    paddingVertical: 36,
-    paddingHorizontal: 18,
-    alignSelf: "flex-start",
-  },
-  buttonText: {
-    color: "#007bff",
-    margin: 8,
-  },
+	rootContainer: {
+		flex: 1,
+	},
+	linkContainer: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	buttonText: {
+		color: "#007bff",
+		margin: 8,
+	},
 });
 
 export default ResultsScreen;

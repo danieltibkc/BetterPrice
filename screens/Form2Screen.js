@@ -1,62 +1,67 @@
-import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import NavigateButton from "../components/UI/NavigateButton";
 
 const Form2Screen = ({ navigation }) => {
-  const handleGoToForm1 = () => {
-    navigation.goBack();
-  };
+	const handleGoToForm1 = () => {
+		navigation.goBack();
+	};
 
-  const handleGoToResults = () => {
-    navigation.navigate("Results");
-  };
+	const handleGoToResults = () => {
+		navigation.navigate("Results");
+	};
 
-  return (
-    <View style={styles.rootContainer}>
-      <View style={styles.navigationControlStyle}>
-        <Pressable onPress={handleGoToForm1} accessibilityHint="goBackButton">
-          <Ionicons name="arrow-back" size={36} color={"#007bff"} />
-        </Pressable>
-        <Pressable
-          onPress={handleGoToResults}
-          accessibilityHint="goToResultsButton"
-        >
-          <Ionicons name="arrow-forward" size={36} color={"#007bff"} />
-        </Pressable>
-      </View>
-      <View style={styles.screenNameStyle}>
-        <Text>Form1Screen</Text>
-      </View>
-    </View>
-  );
+	return (
+		<ImageBackground
+			source={require("../assets/Background.png")}
+			style={{ width: "100%", height: "100%" }}
+			resizeMode="cover"
+		>
+			<View style={styles.rootContainer}>
+				<View style={styles.navigationControlStyle}>
+					<NavigateButton
+						onPress={handleGoToForm1}
+						accessibilityHint="goBackButton"
+						direction="back"
+					/>
+					<NavigateButton
+						onPress={handleGoToResults}
+						accessibilityHint="goToResultsButton"
+						direction="forward"
+					/>
+				</View>
+				<View style={styles.screenNameStyle}>
+					<Text>Form2Screen</Text>
+				</View>
+			</View>
+		</ImageBackground>
+	);
 };
 
 Form2Screen.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
-  }).isRequired,
+	navigation: PropTypes.shape({
+		navigate: PropTypes.func.isRequired,
+		goBack: PropTypes.func.isRequired,
+	}).isRequired,
 };
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-  },
-  navigationControlStyle: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 18,
-    paddingVertical: 36,
-  },
-  screenNameStyle: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#007bff",
-    margin: 8,
-  },
+	rootContainer: {
+		flex: 1,
+	},
+	navigationControlStyle: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
+	screenNameStyle: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	buttonText: {
+		color: "#007bff",
+		margin: 8,
+	},
 });
 
 export default Form2Screen;
