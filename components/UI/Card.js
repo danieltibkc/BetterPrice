@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import PropTypes from "prop-types";
 
-const Card = ({ children }) => {
-  return <View style={styles.rootContainer}>{children}</View>;
+const Card = ({ children, style }) => {
+  return <View style={[styles.rootContainer, style]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 4,
     backgroundColor: "white",
-    padding: 18,
+    padding: 8,
     borderRadius: 8,
   },
 });
 
 Card.propTypes = {
   children: PropTypes.elementType,
+  style: PropTypes.object,
 };
 
 export default Card;
