@@ -9,14 +9,15 @@ const styles = StyleSheet.create({
   rootContainer: {
     shadowColor: "#000",
     shadowOffset: {
-      width: 2,
-      height: 6,
+      width: 1,
+      height: 1,
     },
-    shadowOpacity: 0.69,
-    shadowRadius: 8.3,
-
-    borderRadius: 15,
-    elevation: 13,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+    backgroundColor: "white",
+    padding: 18,
+    borderRadius: 8,
   },
 });
 
