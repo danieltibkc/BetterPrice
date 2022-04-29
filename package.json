@@ -46,6 +46,7 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "husky": "^7.0.4",
     "prettier": "2.6.2",
+    "prop-types": "^15.8.1",
     "react-test-renderer": "17"
   },
   "private": true

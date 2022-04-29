@@ -45,9 +45,13 @@ const FormQuestion = ({ label, type, config, value, onChange }) => {
 
 FormQuestion.propTypes = {
   label: PropTypes.string,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(["input", "check"]),
   config: PropTypes.object,
-  value: PropTypes.string || PropTypes.object,
+  value: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   onChange: PropTypes.func,
 };
 

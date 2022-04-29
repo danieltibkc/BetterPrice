@@ -22,7 +22,10 @@ const styles = StyleSheet.create({
 });
 
 Card.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
   style: PropTypes.object,
 };
 

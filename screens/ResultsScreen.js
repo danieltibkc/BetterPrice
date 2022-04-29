@@ -41,7 +41,7 @@ const ResultsScreen = ({ navigation }) => {
 
   return (
     <Background>
-      <View style={styles.rootContainer}>
+      <View style={styles.rootContainer} accessibilityHint="ResultsScreen">
         <NavigateButton
           onPress={handleGoToForm2}
           accessibilityHint="goToForm2Button"
