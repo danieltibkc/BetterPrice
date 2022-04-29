@@ -5,6 +5,8 @@ import Form1Screen from "./screens/Form1Screen";
 import SearchLocationScreen from "./screens/SearchLocationScreen";
 import ResultsScreen from "./screens/ResultsScreen";
 import Form2Screen from "./screens/Form2Screen";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,17 +29,19 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Form" component={LocationStack} />
-          <Stack.Screen name="Form2" component={Form2Screen} />
-          <Stack.Screen name="Results" component={ResultsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="Form" component={LocationStack} />
+            <Stack.Screen name="Form2" component={Form2Screen} />
+            <Stack.Screen name="Results" component={ResultsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }
