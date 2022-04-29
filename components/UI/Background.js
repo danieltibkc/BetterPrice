@@ -14,7 +14,10 @@ const Background = ({ children }) => {
 };
 
 Background.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 export default Background;

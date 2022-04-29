@@ -14,32 +14,32 @@ describe("Testing React Navigation", () => {
   //			ResultsScreen
 
   test("Home Screen navigates to Search Location Screen", () => {
-    const { getByText } = render(<App />);
+    const { getByText, getByA11yHint } = render(<App />);
     // Form1Screen go to SearchLocationScreen
     fireEvent.press(getByText("Go to Search Location Screen"));
 
-    const searchLocationText = getByText("SearchLocationScreen");
+    const searchLocationText = getByA11yHint("SearchLocationScreen");
     expect(searchLocationText).toBeTruthy();
   });
 
   test("Home Screen navigates to Form 2 Screen", () => {
-    const { getByText, getByA11yHint } = render(<App />);
+    const { getByA11yHint } = render(<App />);
     // Form1Screen go to Form2Screen
     fireEvent.press(getByA11yHint("goToForm2Button"));
 
-    const searchLocationText = getByText("Form2Screen");
+    const searchLocationText = getByA11yHint("Form2Screen");
     expect(searchLocationText).toBeTruthy();
   });
 
   test("Form 2 Screen navigates to Results Screen", () => {
-    const { getByText, getByA11yHint } = render(<App />);
+    const { getByA11yHint } = render(<App />);
     // Form1Screen go to Form2Screen
     fireEvent.press(getByA11yHint("goToForm2Button"));
 
     // Form2Screen go to ResultsScreen
     fireEvent.press(getByA11yHint("goToResultsButton"));
 
-    const resultsText = getByText("ResultsScreen");
+    const resultsText = getByA11yHint("ResultsScreen");
     expect(resultsText).toBeTruthy();
   });
 
@@ -50,7 +50,7 @@ describe("Testing React Navigation", () => {
 
     // Form2Screen go Back
     fireEvent.press(getByA11yHint("goBackButton"));
-    const form1Text = getByText("Form1Screen");
+    const form1Text = getByA11yHint("Form1Screen");
     const searchText = getByText("Go to Search Location Screen");
 
     expect(form1Text).toBeTruthy();
@@ -64,7 +64,7 @@ describe("Testing React Navigation", () => {
 
     // SearchLocationScreen go Back
     fireEvent.press(getByA11yHint("goBackButton"));
-    const form1Text = getByText("Form1Screen");
+    const form1Text = getByA11yHint("Form1Screen");
     const searchText = getByText("Go to Search Location Screen");
 
     expect(form1Text).toBeTruthy();
@@ -72,7 +72,7 @@ describe("Testing React Navigation", () => {
   });
 
   test("Results Screen navigates Back", () => {
-    const { getByText, getByA11yHint } = render(<App />);
+    const { getByA11yHint } = render(<App />);
     // Form1Screen go to Form2Screen
     fireEvent.press(getByA11yHint("goToForm2Button"));
 
@@ -82,7 +82,7 @@ describe("Testing React Navigation", () => {
     // Form2Screen go to ResultsScreen
     fireEvent.press(getByA11yHint("goBackButton"));
 
-    const form2Text = getByText("Form2Screen");
+    const form2Text = getByA11yHint("Form2Screen");
 
     expect(form2Text).toBeTruthy();
   });
