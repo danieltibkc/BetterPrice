@@ -5,38 +5,51 @@ import Background from "../components/UI/Background";
 import { Globals } from "../constants/styles";
 import Checkbox from "expo-checkbox";
 import Card from "../components/UI/Card";
+import { useState } from "react";
 
-const ResultsScreen = ({ navigation }) => {
+const ResultsScreen = ({ navigation, items, base }) => {
   const handleGoToForm2 = () => {
     navigation.goBack();
   };
 
+  let initialItemsState = items.map((e) => ({ ...e, check: false }));
+
+  const [itemsCond, setItemsCond] = useState(initialItemsState);
+  const [totalPrice, setTotalPrice] = useState(base);
+
+  const calculateTotal = (item) => {
+    const addRemove = item.check ? +item.amount : -item.amount;
+    setTotalPrice(totalPrice + addRemove);
+  };
+
+  const toggleCheckbox = (cb, idx) => {
+    const checkboxData = [...itemsCond];
+    checkboxData[idx].check = !checkboxData[idx].check;
+    setItemsCond(checkboxData);
+    calculateTotal(cb);
+  };
+
   const AddItem = () => {
-    return (
-      <>
-        <View style={styles.rowContainer}>
-          <View style={styles.powerUpContainer}>
-            <Checkbox
-              style={styles.checkboxStyle}
-              color={Globals.colors.teal500}
-            />
-          </View>
-
-          <Card style={styles.powerUpTextContainer}>
-            <Text style={styles.addAmenityTextStyle}>Add a TV</Text>
-          </Card>
-
-          <Text style={styles.addAmenityPriceStyle}>+ $23.20</Text>
+    return itemsCond.map((cb, idx) => (
+      <View style={[styles.rowContainer, { marginVertical: 20 }]} key={cb.id}>
+        <View style={styles.powerUpContainer}>
+          <Checkbox
+            value={cb.check}
+            onValueChange={() => toggleCheckbox(cb, idx)}
+            style={styles.checkboxStyle}
+            color={Globals.colors.teal500}
+          />
         </View>
 
-        <View style={styles.rowContainer}>
-          <View style={styles.totalContainer}>
-            <Text style={styles.totalTextStyle}>Total</Text>
-          </View>
-          <Text style={[styles.textBase, { color: "#4c4c4c" }]}>$123.20</Text>
-        </View>
-      </>
-    );
+        <Card style={styles.powerUpTextContainer}>
+          <Text style={styles.addAmenityTextStyle}>{cb.description}</Text>
+        </Card>
+
+        <Text style={styles.addAmenityPriceStyle}>
+          + ${cb.amount.toFixed(2)}
+        </Text>
+      </View>
+    ));
   };
 
   return (
@@ -52,12 +65,25 @@ const ResultsScreen = ({ navigation }) => {
 
           <View style={[styles.rowContainer, { margin: 16 }]}>
             <Text style={[styles.textBase, { color: Globals.colors.teal500 }]}>
-              $105.29
+              ${base.toFixed(2)}
             </Text>
             <Text style={styles.textBase}>/ night</Text>
           </View>
 
           <AddItem />
+          <View
+            style={[
+              styles.rowContainer,
+              { alignItems: "center", marginVertical: 40 },
+            ]}
+          >
+            <View style={styles.totalContainer}>
+              <Text style={styles.totalTextStyle}>Total</Text>
+            </View>
+            <Text style={[styles.textBase, { color: "#4c4c4c" }]}>
+              ${totalPrice.toFixed(2)}
+            </Text>
+          </View>
         </View>
       </View>
     </Background>
@@ -68,6 +94,8 @@ ResultsScreen.propTypes = {
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
+  items: PropTypes.object.isRequired,
+  base: PropTypes.number.isRequired,
 };
 
 const styles = StyleSheet.create({
