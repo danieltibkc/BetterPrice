@@ -5,9 +5,12 @@ import Background from "../components/UI/Background";
 import FormQuestion from "../components/UI/FormQuestion";
 import { useState } from "react";
 import Button from "../components/UI/Button";
+import { predictAPI } from "../util/http";
 
 const Form2Screen = ({ navigation }) => {
   const [hasAc, setHasAc] = useState(false);
+
+  const [predictionResults, setPredictionResults] = useState({});
 
   const onChangeHasAcValue = () => {
     setHasAc(!hasAc);
@@ -18,7 +21,27 @@ const Form2Screen = ({ navigation }) => {
   };
 
   const handleGoToResults = () => {
-    navigation.navigate("Results");
+    if (predictionResults && Object.keys(predictionResults).length !== 0) {
+      navigation.navigate("Results", {
+        items: predictionResults["items"],
+        base: predictionResults["base"],
+      });
+    }
+  };
+
+  const predictPrice = async () => {
+    const dummy_data = {
+      lat: 1.1233123,
+      long: 24.123103,
+      tv: 1,
+      ac: 0,
+      num_bedr: 6,
+      num_bathr: 4,
+      gym: 1,
+    };
+    const predictionRes = await predictAPI(dummy_data);
+    setPredictionResults(predictionRes);
+    handleGoToResults();
   };
 
   return (
@@ -75,7 +98,11 @@ const Form2Screen = ({ navigation }) => {
           onChange={onChangeHasAcValue}
         />
 
-        <Button label="Calculate" style={{ margin: 16 }} />
+        <Button
+          onPress={predictPrice}
+          label="Calculate"
+          style={{ margin: 16 }}
+        />
       </View>
     </Background>
   );
