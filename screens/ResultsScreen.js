@@ -97,7 +97,7 @@ ResultsScreen.propTypes = {
     goBack: PropTypes.func.isRequired,
   }).isRequired,
   route: PropTypes.shape({
-    params: PropTypes.func,
+    params: PropTypes.object,
     items: PropTypes.array,
     base: PropTypes.number,
   }),
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   powerUpTextContainer: {
-    minWidth: 75,
+    width: 160,
     minHeight: 50,
     justifyContent: "center",
     alignItems: "center",
