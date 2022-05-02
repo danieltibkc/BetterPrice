@@ -5,12 +5,13 @@ import Background from "../components/UI/Background";
 import FormQuestion from "../components/UI/FormQuestion";
 import { useState } from "react";
 import Button from "../components/UI/Button";
+import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { predictAPI } from "../util/http";
 
 const Form2Screen = ({ navigation }) => {
   const [hasAc, setHasAc] = useState(false);
 
-  const [predictionResults, setPredictionResults] = useState({});
+  const [fetching, setFetching] = useState(false);
 
   const onChangeHasAcValue = () => {
     setHasAc(!hasAc);
@@ -20,13 +21,11 @@ const Form2Screen = ({ navigation }) => {
     navigation.goBack();
   };
 
-  const handleGoToResults = () => {
-    if (predictionResults && Object.keys(predictionResults).length !== 0) {
-      navigation.navigate("Results", {
-        items: predictionResults["items"],
-        base: predictionResults["base"],
-      });
-    }
+  const handleGoToResults = ({ items, base }) => {
+    navigation.navigate("Results", {
+      items,
+      base,
+    });
   };
 
   const predictPrice = async () => {
@@ -39,10 +38,20 @@ const Form2Screen = ({ navigation }) => {
       num_bathr: 4,
       gym: 1,
     };
-    const predictionRes = await predictAPI(dummy_data);
-    setPredictionResults(predictionRes);
-    handleGoToResults();
+
+    setFetching(true);
+    const predictions = await predictAPI(dummy_data);
+    setFetching(false);
+
+    handleGoToResults({
+      items: predictions["items"],
+      base: predictions["base"],
+    });
   };
+
+  if (fetching) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <Background>
@@ -56,7 +65,7 @@ const Form2Screen = ({ navigation }) => {
           direction="back"
         />
         <NavigateButton
-          onPress={handleGoToResults}
+          onPress={predictPrice}
           accessibilityHint="goToResultsButton"
           direction="forward"
         />
