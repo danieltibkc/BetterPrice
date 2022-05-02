@@ -7,7 +7,9 @@ import Checkbox from "expo-checkbox";
 import Card from "../components/UI/Card";
 import { useState } from "react";
 
-const ResultsScreen = ({ navigation, items, base }) => {
+const ResultsScreen = ({ navigation, route }) => {
+  const { items, base } = route.params;
+
   const handleGoToForm2 = () => {
     navigation.goBack();
   };
@@ -94,8 +96,11 @@ ResultsScreen.propTypes = {
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
-  items: PropTypes.object.isRequired,
-  base: PropTypes.number.isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.func,
+    items: PropTypes.array,
+    base: PropTypes.number,
+  }),
 };
 
 const styles = StyleSheet.create({
