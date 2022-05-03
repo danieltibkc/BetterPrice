@@ -51,7 +51,7 @@ const Form1Screen = ({ navigation }) => {
           type="input"
           config={{
             maxLength: 2,
-            keyboardType: "decimal-pad",
+            keyboardType: "number-pad",
           }}
         />
         <FormQuestion
@@ -59,7 +59,7 @@ const Form1Screen = ({ navigation }) => {
           type="input"
           config={{
             maxLength: 2,
-            keyboardType: "decimal-pad",
+            keyboardType: "number-pad",
           }}
         />
         <FormQuestion
