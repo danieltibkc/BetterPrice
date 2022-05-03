@@ -41,14 +41,14 @@ const Form2Screen = ({ navigation }) => {
 
       <View style={styles.rootContainer}>
         <FormQuestion
-          label="Do you offer parking?"
+          label="Does your place have kitchen?"
           type="check"
           value={hasAc}
           onChange={onChangeHasAcValue}
         />
 
         <FormQuestion
-          label="Do you have a TV?"
+          label="Do you offer parking?"
           type="check"
           value={hasAc}
           onChange={onChangeHasAcValue}
