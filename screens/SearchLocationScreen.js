@@ -1,30 +1,31 @@
 import PropTypes from "prop-types";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import NavigateButton from "../components/UI/NavigateButton";
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { geocodeAPI } from "../util/http";
+import Card from "../components/UI/Card";
+import { Globals } from "../constants/styles";
 
 const SearchLocationScreen = ({ navigation }) => {
 	const handleGoToForm = () => {
 		navigation.goBack();
 	};
 
+	const [errorMsg, setErrorMsg] = useState(null);
 	const [selectedLocation, setSelectedLocation] = useState(null);
-	const [locationInfo, setLocationInfo] = useState("");
+	const [locationInfo, setLocationInfo] = useState({});
 	const [location, setLocation] = useState({
 		latitude: 37.78,
 		longitude: -122.43,
 	});
 
-	// const [errorMsg, setErrorMsg] = useState(null);
-
 	useEffect(() => {
 		(async () => {
 			let { status } = await Location.requestForegroundPermissionsAsync();
 			if (status !== "granted") {
-				// setErrorMsg("Permission to access location was denied");
+				setErrorMsg("Permission to access location was denied");
 				return;
 			}
 
@@ -33,6 +34,7 @@ const SearchLocationScreen = ({ navigation }) => {
 				latitude: currLocation.latitdude,
 				longitude: currLocation.longitude,
 			});
+			location;
 		})();
 	}, []);
 
@@ -46,15 +48,18 @@ const SearchLocationScreen = ({ navigation }) => {
 	const selectLocationHandler = async (event) => {
 		const lat = event.nativeEvent.coordinate.latitude;
 		const lng = event.nativeEvent.coordinate.longitude;
-		location;
 		setSelectedLocation({ lat: lat, lng: lng });
 		await getPlaceInfo(lat, lng);
 	};
 
 	const getPlaceInfo = async (lat, lng) => {
-		const places = await geocodeAPI(lat, lng);
-		const placeName = places.data.data[0].label;
-		setLocationInfo(placeName);
+		try {
+			const places = await geocodeAPI(lat, lng);
+			const placeName = places.data.data[0];
+			setLocationInfo(placeName);
+		} catch (e) {
+			setErrorMsg(e);
+		}
 	};
 
 	return (
@@ -75,13 +80,49 @@ const SearchLocationScreen = ({ navigation }) => {
 			>
 				{selectedLocation && (
 					<Marker
-						title={locationInfo}
 						image={require("../assets/marker.png")}
 						coordinate={{
 							latitude: selectedLocation.lat,
 							longitude: selectedLocation.lng,
 						}}
-					/>
+					>
+						<Callout tooltip>
+							<Card style={{ width: 150, alignItems: "center" }}>
+								<Text
+									style={{
+										fontSize: 24,
+										color: Globals.colors.text,
+										fontWeight: "bold",
+										textAlign: "center",
+									}}
+								>
+                  Address:
+								</Text>
+								<Text
+									style={{
+										fontWeight: "300",
+										fontSize: 18,
+										textAlign: "center",
+									}}
+								>
+									{locationInfo.name}
+								</Text>
+							</Card>
+						</Callout>
+					</Marker>
+				)}
+				{errorMsg && (
+					<View
+						style={{
+							alignSelf: "flex-end",
+							height: 60,
+							backgroundColor: "red",
+							margin: 30,
+							padding: 20,
+						}}
+					>
+						<Text style={{ color: "white" }}>{errorMsg}</Text>
+					</View>
 				)}
 			</MapView>
 		</View>

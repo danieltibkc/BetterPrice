@@ -17,7 +17,11 @@ export const predictAPI = async (dispatch, getState) => {
 
 export const geocodeAPI = async (lat, long) => {
 	const queryURL = `${geocodeReverse}${lat},${long}`;
-	const response = await axios.get(queryURL);
-
+	let response;
+	try {
+		response = await axios.get(queryURL);
+	} catch (e) {
+		throw "No information found for this place";
+	}
 	return response;
 };
