@@ -18,12 +18,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.danieltibkc.betterprice",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDNcgmfltd88GmXGAhmHpT6SYs1RCY_a88"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyALZvryG_p4hN3BYbOQSkgemEZj9i7W9Aw"
+        }
       }
     },
     "web": {
